@@ -14,7 +14,7 @@ public class Controller {
     }
 
     public boolean isValid() {
-        return this.getClass().getClassLoader().getResource(this.resource) == null;
+        return this.getClass().getClassLoader().getResource(this.resource) != null;
     }
 
     public void onGET(Socket socket) throws IOException {
