@@ -5,11 +5,13 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
 public class Resource {
+    public byte[] bytes;
     private String html;
 
-    public Resource(InputStream html) {
+    public Resource(InputStream bytes) {
         try {
-            this.html = new String(html.readAllBytes(), StandardCharsets.UTF_8);
+            this.bytes = bytes.readAllBytes();
+            this.html = new String(this.bytes, StandardCharsets.UTF_8);
         } catch (IOException e) {
             e.printStackTrace();
         }

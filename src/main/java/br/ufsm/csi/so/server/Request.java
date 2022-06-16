@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 import br.ufsm.csi.so.controller.CSSController;
 import br.ufsm.csi.so.controller.HomeController;
+import br.ufsm.csi.so.controller.ImageController;
 import br.ufsm.csi.so.controller._404Controller;
 import br.ufsm.csi.so.util.Controller;
 
@@ -26,6 +27,13 @@ public class Request implements Runnable {
 
         Scanner scanner = new Scanner(in);
 
+        // erro chato: fica dando NoSuchElement, isso corrige
+        if (!scanner.hasNext()) {
+            scanner.close();
+
+            return;
+        }
+
         String method = scanner.next();
         String path = scanner.next();
 
@@ -34,6 +42,9 @@ public class Request implements Runnable {
         // controlador de CSS
         if (path.startsWith("/css/"))
             controller = new CSSController(path.substring(1));
+        // controlador de imagem
+        if (path.startsWith("/img/"))
+            controller = new ImageController(path.substring(1));
 
         if (path.equals("/home") || path.equals("/"))
             controller = new HomeController(this.server);
