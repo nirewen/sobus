@@ -48,7 +48,8 @@ public class Request implements Runnable {
         if (method.equals("POST"))
             controller.onPOST(socket);
 
-        out.flush();
+        in.close();
+        out.close();
 
         scanner.close();
         this.socket.close();
