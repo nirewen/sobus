@@ -10,7 +10,6 @@ import br.ufsm.csi.so.controller.CSSController;
 import br.ufsm.csi.so.controller.HomeController;
 import br.ufsm.csi.so.controller.ImageController;
 import br.ufsm.csi.so.controller._404Controller;
-import br.ufsm.csi.so.util.Controller;
 
 public class Request implements Runnable {
     private Server server;

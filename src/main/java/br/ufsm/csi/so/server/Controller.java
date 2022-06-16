@@ -1,8 +1,10 @@
-package br.ufsm.csi.so.util;
+package br.ufsm.csi.so.server;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.Socket;
+
+import br.ufsm.csi.so.util.RequestUtil;
 
 public class Controller {
     public final String resource;

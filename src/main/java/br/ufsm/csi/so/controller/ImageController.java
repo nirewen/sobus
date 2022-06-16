@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.Socket;
 
-import br.ufsm.csi.so.util.Controller;
+import br.ufsm.csi.so.server.Controller;
 import br.ufsm.csi.so.util.RequestUtil;
 import br.ufsm.csi.so.util.Resource;
 
