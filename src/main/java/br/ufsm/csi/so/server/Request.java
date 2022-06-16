@@ -36,7 +36,9 @@ public class Request implements Runnable {
         String method = scanner.next();
         String path = scanner.next();
 
-        Controller controller = new Controller(path.substring(1));
+        System.out.println(method + " " + path);
+
+        Controller controller = new Controller(path);
 
         // controlador de CSS
         if (path.startsWith("/css/"))
