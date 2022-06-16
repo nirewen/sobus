@@ -5,21 +5,29 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
 public class Resource {
-    public String code;
-    public String status;
-    public String html;
+    private String html;
 
-    public Resource(String code, InputStream html) {
+    public Resource(InputStream html) {
         try {
-            this.code = code;
             this.html = new String(html.readAllBytes(), StandardCharsets.UTF_8);
-
-            this.status = "OK";
-
-            if (this.code.equals("404"))
-                this.status = "Not Found";
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static Resource from(String resource) {
+        InputStream is = Resource.class
+                .getClassLoader()
+                .getResourceAsStream(resource);
+
+        if (is == null) {
+            return null;
+        }
+
+        return new Resource(is);
+    }
+
+    public String getHTML() {
+        return this.html;
     }
 }

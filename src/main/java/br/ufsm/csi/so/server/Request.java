@@ -6,8 +6,9 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.util.Scanner;
 
-import br.ufsm.csi.so.util.HTMLUtil;
-import br.ufsm.csi.so.util.Resource;
+import br.ufsm.csi.so.controller.HomeController;
+import br.ufsm.csi.so.controller._404Controller;
+import br.ufsm.csi.so.util.Controller;
 
 public class Request implements Runnable {
     private Server server;
@@ -33,23 +34,21 @@ public class Request implements Runnable {
 
         String method = scanner.next();
         String path = scanner.next();
-        String file = "404";
+
+        Controller controller = new _404Controller(); // assumir que a página não existe
 
         if (path.equals("/home") || path.equals("/"))
-            file = "home.html";
-        if (path.equals("/reservar"))
-            file = "reservar.html";
-        if (path.equals("/confirmar") && method.equals("POST")) {
-            file = "home.html";
-        }
+            controller = new HomeController(this.server);
+        // if (path.equals("/reservar"))
+        // file = "reservar.html";
+        // if (path.equals("/confirmar"))
+        // file = "home.html";
 
-        Resource resource = HTMLUtil.getResource(file);
-        String code = resource.code;
-        String status = resource.status;
-        String html = resource.html;
+        if (method.equals("GET"))
+            controller.onGET(socket);
 
-        out.write(String.format("HTTP/1.1 %s %s\nContent-Type: text/html;charset=UTF-8\n\n", code, status).getBytes());
-        out.write(html.getBytes());
+        if (method.equals("POST"))
+            controller.onPOST(socket);
 
         out.flush();
 
