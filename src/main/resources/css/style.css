@@ -1,3 +1,13 @@
+* {
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
 body {
     margin: 0;
+}
+
+.navbar {
+    display: flex;
+    height: 48px;
 }
