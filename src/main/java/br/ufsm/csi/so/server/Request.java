@@ -35,12 +35,12 @@ public class Request implements Runnable {
         String path = scanner.next();
         String file = "404";
 
-        if (path.equals("/home"))
+        if (path.equals("/home") || path.equals("/"))
             file = "home.html";
         if (path.equals("/reservar"))
             file = "reservar.html";
         if (path.equals("/confirmar") && method.equals("POST")) {
-            file = "confirmar.html";
+            file = "home.html";
         }
 
         Resource resource = HTMLUtil.getResource(file);
