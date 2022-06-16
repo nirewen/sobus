@@ -37,7 +37,7 @@ public class Request implements Runnable {
         String method = scanner.next();
         String path = scanner.next();
 
-        Controller controller = new _404Controller(); // assumir que a página não existe
+        Controller controller = new Controller(path.substring(1));
 
         // controlador de CSS
         if (path.startsWith("/css/"))
@@ -52,6 +52,10 @@ public class Request implements Runnable {
         // file = "reservar.html";
         // if (path.equals("/confirmar"))
         // file = "home.html";
+
+        // caso não exista a página
+        if (!controller.isValid())
+            controller = new _404Controller();
 
         if (method.equals("GET"))
             controller.onGET(socket);

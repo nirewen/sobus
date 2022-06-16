@@ -11,6 +11,10 @@ public class Controller {
         this.resource = resource;
     }
 
+    public boolean isValid() {
+        return this.getClass().getClassLoader().getResource(this.resource) == null;
+    }
+
     public void onGET(Socket socket) throws IOException {
         OutputStream out = socket.getOutputStream();
 
