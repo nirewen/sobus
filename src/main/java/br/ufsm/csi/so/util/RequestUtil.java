@@ -2,6 +2,10 @@ package br.ufsm.csi.so.util;
 
 public class RequestUtil {
     public static String getHeader(int code) {
+        return RequestUtil.getHeader(code, "text/html");
+    }
+
+    public static String getHeader(int code, String mimeType) {
         String status = switch (code) {
             case 200 -> "OK";
             case 404 -> "Not Found";
@@ -9,6 +13,6 @@ public class RequestUtil {
             default -> "Unknown";
         };
 
-        return String.format("HTTP/1.1 %s %s\nContent-Type: text/html; charset=UTF-8\n\n", code, status);
+        return String.format("HTTP/1.1 %d %s\nContent-Type: %s; charset=UTF-8\n\n", code, status, mimeType);
     }
 }

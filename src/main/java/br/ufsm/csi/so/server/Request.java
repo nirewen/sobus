@@ -6,6 +6,7 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.util.Scanner;
 
+import br.ufsm.csi.so.controller.CSSController;
 import br.ufsm.csi.so.controller.HomeController;
 import br.ufsm.csi.so.controller._404Controller;
 import br.ufsm.csi.so.util.Controller;
@@ -25,17 +26,14 @@ public class Request implements Runnable {
 
         Scanner scanner = new Scanner(in);
 
-        // erro chato: fica dando NoSuchElement, isso corrige
-        if (!scanner.hasNext()) {
-            scanner.close();
-
-            return;
-        }
-
         String method = scanner.next();
         String path = scanner.next();
 
         Controller controller = new _404Controller(); // assumir que a página não existe
+
+        // controlador de CSS
+        if (path.startsWith("/css/"))
+            controller = new CSSController(path.substring(1));
 
         if (path.equals("/home") || path.equals("/"))
             controller = new HomeController(this.server);
