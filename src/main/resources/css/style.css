@@ -68,6 +68,22 @@ main {
 .bus .seat.occupied {
     background-color: #ff0000;
     color: #ffffff;
+    position: relative;
+}
+
+.bus .seat.occupied:hover::before {
+    content: attr(data-name) '\a'attr(data-date) ' ' attr(data-hour);
+    position: absolute;
+    left: 50%;
+    top: -100%;
+    transform: translateX(-50%);
+    width: max-content;
+    white-space: pre-wrap;
+    text-align: center;
+    line-height: 20px;
+    background-color: #1f1f1f;
+    padding: 4px 8px;
+    border-radius: 5px;
 }
 
 .container {

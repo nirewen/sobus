@@ -39,8 +39,13 @@ public class HomeController extends Controller {
             element.append("<a");
             element.append(" class=\"seat").append(seat.isTaken() ? " occupied" : "").append("\"");
 
-            if (!seat.isTaken())
+            if (!seat.isTaken()) {
                 element.append(" href=\"/reservar?id=").append(seat.getId()).append("\"");
+            } else {
+                element.append(" data-name=\"").append(seat.getName()).append("\"");
+                element.append(" data-date=\"").append(seat.getDate()).append("\"");
+                element.append(" data-hour=\"").append(seat.getHour()).append("\"");
+            }
 
             element.append(">");
             element.append(seat.getId());
