@@ -33,6 +33,9 @@ public class Logger {
         Thread produz = new Thread(new ProduzLog());
         Thread armazena = new Thread(new ArmazenaLog());
 
+        produz.setName("Produzir log");
+        armazena.setName("Armazenar log");
+
         produz.start();
         armazena.start();
     }
