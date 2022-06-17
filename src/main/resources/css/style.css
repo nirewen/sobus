@@ -71,7 +71,8 @@ main {
 
     background-color: #8dd6ff;
     color: #000000;
-    font-weight: 500;
+:sparkl    font-size: 1.5em;
+    font-weight: 600;
 
     border-radius: 5px;
     box-shadow: 0px 2px 5px rgb(0, 0, 0, 0.25);
@@ -93,10 +94,13 @@ main {
     width: max-content;
     white-space: pre-wrap;
     text-align: center;
+    font-size: 1rem;
+    font-weight: 500;
     line-height: 20px;
     background-color: #1f1f1f;
     padding: 4px 8px;
     border-radius: 5px;
+    z-index: 30;
 }
 
 .container {
