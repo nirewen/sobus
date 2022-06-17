@@ -9,7 +9,7 @@ public class QueryParams {
     public final Map<String, String> query;
 
     public QueryParams(String uri) {
-        String directory = uri.substring(1);
+        String directory = uri;
         String[] strings = uri.split("&");
 
         Map<String, String> query = new HashMap<>();
@@ -21,7 +21,7 @@ public class QueryParams {
                 if (i == 0) {
                     String[] firstPair = kvPair.split("\\?");
 
-                    directory = firstPair[0].substring(1);
+                    directory = firstPair[0];
                     kvPair = firstPair[1];
                 }
 

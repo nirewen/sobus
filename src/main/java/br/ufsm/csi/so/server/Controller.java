@@ -10,6 +10,9 @@ public class Controller {
     public final String resource;
 
     public Controller(String resource) {
+        if (resource.startsWith("/"))
+            resource = resource.substring(1);
+
         this.resource = resource;
     }
 

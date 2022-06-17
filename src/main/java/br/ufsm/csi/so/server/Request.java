@@ -48,16 +48,16 @@ public class Request implements Runnable {
         Controller controller = new Controller(directory);
 
         // controlador de CSS
-        if (path.startsWith("/css/"))
+        if (directory.startsWith("/css/"))
             controller = new CSSController(directory);
         // controlador de imagem
-        if (path.startsWith("/img/"))
+        if (directory.startsWith("/img/"))
             controller = new ImageController(directory);
 
-        if (path.startsWith("/home") || path.equals("/"))
+        if (directory.equals("/home") || directory.equals("/"))
             controller = new HomeController(this.server);
 
-        if (path.startsWith("/reservar"))
+        if (directory.equals("/reservar"))
             controller = new ReservarController();
 
         // caso não exista a página
