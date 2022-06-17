@@ -32,13 +32,22 @@ main {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(4, 1fr);
-    gap: 0.5em 2em;
+    gap: 5% 6%;
     flex: 1;
     aspect-ratio: 2/1;
     margin: 0 15%;
     padding: 11% 29% 11% 11%;
+    position: relative;
+}
+
+.bus::before {
+    content: '';
     background-image: url(/img/Bus.png);
     background-size: cover;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
 }
 
 .bus .seat {
@@ -52,6 +61,7 @@ main {
     color: #000000;
 
     border-radius: 5px;
+    box-shadow: 0px 2px 5px rgb(0 0 0 / 25%);
     text-decoration: none;
 }
 
@@ -62,7 +72,7 @@ main {
 
 .container {
     margin: 8% 25%;
-    padding: 2%;
+    padding: 3%;
     background-color: #cccaca;
     border-radius: 5px;
 }
@@ -70,20 +80,62 @@ main {
 .container form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 1em;
 }
 
 .container form .control {
     display: flex;
     flex-direction: column;
+    gap: 5px;
+}
+
+.container form .control-inline {
+    display: flex;
+    gap: 10px;
+    align-self: flex-end;
 }
 
 .container .title {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    margin-bottom: 2em;
 }
 
 .container .title h2 {
-    margin-top: 0;
+    margin: 0;
+    text-transform: uppercase;
+    font-weight: 800;
+}
+
+.btn {
+    padding: 8px 24px;
+    background: rgba(255, 223, 111, 0.67);
+    box-shadow: 0px 2px 5px 0px rgb(0 0 0 / 25%);
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    color: #000000;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.btn.btn-primary {
+    background: rgba(185, 255, 184, 0.67);
+}
+
+label {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+input {
+    padding: 10px;
+    border: none;
+    background: #fffbfb;
+    box-shadow: inset 0px 4px 5px 1px rgb(0 0 0 / 25%);
+    border-radius: 6px;
+    font-size: 14px;
 }
