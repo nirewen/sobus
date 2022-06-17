@@ -58,7 +58,7 @@ public class QueryParams {
             return "";
 
         StringBuilder sb = new StringBuilder()
-                .append("{ ");
+                .append(Chalk.of("{ ").yellow());
 
         Iterator<Map.Entry<String, String>> it = this.query.entrySet().iterator();
 
@@ -68,7 +68,7 @@ public class QueryParams {
             String key = entry.getKey();
             String value = entry.getValue();
 
-            sb.append(key).append(": ").append(value);
+            sb.append(Chalk.of(key).yellow()).append(Chalk.of(": ").orange()).append(Chalk.of(value).darkCyan());
 
             if (it.hasNext())
                 sb.append(",");
@@ -76,7 +76,7 @@ public class QueryParams {
             sb.append(" ");
         }
 
-        sb.append("}");
+        sb.append(Chalk.of("}").yellow());
 
         return sb.toString();
     }

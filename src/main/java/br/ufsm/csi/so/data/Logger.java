@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.net.Socket;
 import java.util.concurrent.Semaphore;
 
+import br.ufsm.csi.so.util.Terminal;
 import lombok.SneakyThrows;
 
 public class Logger {
@@ -22,7 +23,7 @@ public class Logger {
     @SneakyThrows
     public Logger() {
         if (file.createNewFile()) {
-            System.out.println("Arquivo de log criado: " + file.getName());
+            Terminal.printLogFile(file.getName());
         }
     }
 

@@ -15,6 +15,7 @@ import br.ufsm.csi.so.controller.RedirectController;
 import br.ufsm.csi.so.controller.ReservarController;
 import br.ufsm.csi.so.controller._404Controller;
 import br.ufsm.csi.so.util.QueryParams;
+import br.ufsm.csi.so.util.Terminal;
 import br.ufsm.csi.so.util.QueryParams.Query;
 import lombok.SneakyThrows;
 
@@ -48,7 +49,7 @@ public class Request implements Runnable {
         String directory = qs.directory;
         Query query = qs.query;
 
-        System.out.println(method + " " + directory + " " + qs);
+        Terminal.printRequest(method, directory, qs);
 
         Controller controller = new Controller(directory);
 

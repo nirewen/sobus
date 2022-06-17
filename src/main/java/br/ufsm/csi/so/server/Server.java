@@ -4,6 +4,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.Semaphore;
 
+import br.ufsm.csi.so.util.Terminal;
 import lombok.SneakyThrows;
 
 public class Server {
@@ -18,7 +19,7 @@ public class Server {
     public void listen(int port) {
         this.server = new ServerSocket(port);
 
-        System.out.println("Ouvindo na porta: " + port);
+        Terminal.printPort(port);
 
         while (true) {
             Socket socket = this.server.accept();

@@ -8,6 +8,7 @@ import br.ufsm.csi.so.App;
 import br.ufsm.csi.so.data.Seat;
 import br.ufsm.csi.so.server.Controller;
 import br.ufsm.csi.so.util.Header;
+import br.ufsm.csi.so.util.Terminal;
 import br.ufsm.csi.so.util.QueryParams.Query;
 import lombok.SneakyThrows;
 
@@ -45,6 +46,7 @@ public class ConfirmController extends Controller {
             seat.setTaken(true);
 
             App.logger.log(socket, seat);
+            Terminal.printLog(seat);
 
             header.addHeader("Location: /home?success=true");
 
