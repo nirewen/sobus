@@ -11,7 +11,7 @@ public class App {
     public static List<Reserva> reservas = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
-        for (int i = 0; i < 25; i++) {
+        for (int i = 1; i <= 20; i++) {
             reservas.add(new Reserva(i));
         }
 
