@@ -57,8 +57,8 @@ public class Request implements Runnable {
         if (directory.equals("/home") || directory.equals("/"))
             controller = new HomeController(this.server);
 
-        if (directory.equals("/reservar"))
-            controller = new ReservarController();
+        if (directory.equals("/reservar") && query.get("id") != null)
+            controller = new ReservarController(query.get("id"));
 
         // caso não exista a página
         if (!controller.isValid())

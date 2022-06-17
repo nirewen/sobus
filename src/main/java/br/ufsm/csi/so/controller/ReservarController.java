@@ -9,8 +9,12 @@ import br.ufsm.csi.so.util.RequestUtil;
 import br.ufsm.csi.so.util.Resource;
 
 public class ReservarController extends Controller {
-    public ReservarController() {
+    private String seat;
+
+    public ReservarController(String seat) {
         super("reservar.html");
+
+        this.seat = seat;
     }
 
     @Override
@@ -21,6 +25,10 @@ public class ReservarController extends Controller {
 
         out.write(RequestUtil.getHeader(200).getBytes());
 
-        out.write(resource.getHTML().getBytes());
+        String html = resource.getHTML();
+
+        html = html.replaceAll("<!-- SEAT -->", this.seat);
+
+        out.write(html.getBytes());
     }
 }

@@ -15,6 +15,12 @@
         </nav>
         <main>
             <div class="container">
+                <div class="title">
+                    <h2>
+                        Reservar assento de número
+                        <!-- SEAT -->
+                    </h2>
+                </div>
                 <form action="/confirmar" method="get">
                     <div class="control">
                         <label for="name">Seu nome:</label>
@@ -23,6 +29,10 @@
                     <div class="control">
                         <label for="date">Data da reserva:</label>
                         <input type="datetime-local" name="date" id="date" />
+                    </div>
+                    <div class="control-inline">
+                        <a href="/home" class="btn">Cancelar</a>
+                        <button type="submit">Finalizar</button>
                     </div>
                 </form>
             </div>

@@ -25,6 +25,7 @@ body {
 
 main {
     display: flex;
+    flex-direction: column;
 }
 
 .bus {
@@ -57,4 +58,32 @@ main {
 .bus .seat.occupied {
     background-color: #ff0000;
     color: #ffffff;
+}
+
+.container {
+    margin: 8% 25%;
+    padding: 2%;
+    background-color: #cccaca;
+    border-radius: 5px;
+}
+
+.container form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.container form .control {
+    display: flex;
+    flex-direction: column;
+}
+
+.container .title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container .title h2 {
+    margin-top: 0;
 }
