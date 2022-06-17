@@ -1,18 +1,18 @@
 package br.ufsm.csi.so.data;
 
-public class Reserva {
-    private int seat;
+public class Seat {
+    private int id;
     private String name;
     private String date;
     private String hour;
     private boolean taken;
 
-    public Reserva(int seat) {
-        this.seat = seat;
+    public Seat(int id) {
+        this.id = id;
     }
 
-    public int getSeat() {
-        return this.seat;
+    public int getId() {
+        return this.id;
     }
 
     public String getName() {

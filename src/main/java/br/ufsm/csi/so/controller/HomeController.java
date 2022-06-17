@@ -6,7 +6,7 @@ import java.net.Socket;
 import java.util.Map;
 
 import br.ufsm.csi.so.App;
-import br.ufsm.csi.so.data.Reserva;
+import br.ufsm.csi.so.data.Seat;
 import br.ufsm.csi.so.server.Controller;
 import br.ufsm.csi.so.util.Header;
 import br.ufsm.csi.so.util.Resource;
@@ -33,8 +33,8 @@ public class HomeController extends Controller {
 
         StringBuilder sb = new StringBuilder();
 
-        for (Map.Entry<Integer, Reserva> entry : App.reservas.entrySet()) {
-            Reserva r = entry.getValue();
+        for (Map.Entry<Integer, Seat> entry : App.seats.entrySet()) {
+            Seat r = entry.getValue();
 
             StringBuilder element = new StringBuilder();
 
@@ -42,10 +42,10 @@ public class HomeController extends Controller {
             element.append(" class=\"seat").append(r.isTaken() ? " occupied" : "").append("\"");
 
             if (!r.isTaken())
-                element.append(" href=\"/reservar?id=").append(r.getSeat()).append("\"");
+                element.append(" href=\"/reservar?id=").append(r.getId()).append("\"");
 
             element.append(">");
-            element.append(r.getSeat());
+            element.append(r.getId());
             element.append("</a>\n");
 
             sb.append(element);

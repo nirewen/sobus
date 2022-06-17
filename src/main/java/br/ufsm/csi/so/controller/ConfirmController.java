@@ -5,7 +5,7 @@ import java.io.OutputStream;
 import java.net.Socket;
 
 import br.ufsm.csi.so.App;
-import br.ufsm.csi.so.data.Reserva;
+import br.ufsm.csi.so.data.Seat;
 import br.ufsm.csi.so.server.Controller;
 import br.ufsm.csi.so.util.Header;
 import br.ufsm.csi.so.util.QueryParams.Query;
@@ -27,14 +27,14 @@ public class ConfirmController extends Controller {
         String name = this.query.get("name");
         String[] date = this.query.get("date").split("T");
 
-        Reserva reserva = App.reservas.get(id);
+        Seat seat = App.seats.get(id);
 
         // id válido & data válida & assento vago
-        if (reserva != null && date.length == 2 && !reserva.isTaken()) {
-            reserva.setName(name);
-            reserva.setDate(date[0]);
-            reserva.setHour(date[1]);
-            reserva.setTaken(true);
+        if (seat != null && date.length == 2 && !seat.isTaken()) {
+            seat.setName(name);
+            seat.setDate(date[0]);
+            seat.setHour(date[1]);
+            seat.setTaken(true);
         }
 
         Header header = new Header(302)

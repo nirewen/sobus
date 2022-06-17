@@ -4,15 +4,15 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import br.ufsm.csi.so.data.Reserva;
+import br.ufsm.csi.so.data.Seat;
 import br.ufsm.csi.so.server.Server;
 
 public class App {
-    public static Map<Integer, Reserva> reservas = new HashMap<>();
+    public static Map<Integer, Seat> seats = new HashMap<>();
 
     public static void main(String[] args) throws IOException {
         for (int i = 1; i <= 20; i++) {
-            reservas.put(i, new Reserva(i));
+            seats.put(i, new Seat(i));
         }
 
         Server server = new Server();
