@@ -35,9 +35,13 @@ public class HomeController extends Controller {
         for (Reserva r : App.reservas) {
             StringBuilder element = new StringBuilder();
 
-            element.append("<a ");
-            element.append("class=\"seat").append(r.isTaken() ? " occupied" : "").append("\" ");
-            element.append("href=\"/reservar?id=").append(r.getSeat()).append("\">");
+            element.append("<a");
+            element.append(" class=\"seat").append(r.isTaken() ? " occupied" : "").append("\"");
+
+            if (!r.isTaken())
+                element.append(" href=\"/reservar?id=").append(r.getSeat()).append("\"");
+
+            element.append(">");
             element.append(r.getSeat());
             element.append("</a>\n");
 
