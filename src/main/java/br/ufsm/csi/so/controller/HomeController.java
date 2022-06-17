@@ -3,21 +3,22 @@ package br.ufsm.csi.so.controller;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.util.Map;
 
 import br.ufsm.csi.so.App;
 import br.ufsm.csi.so.data.Reserva;
 import br.ufsm.csi.so.server.Controller;
-import br.ufsm.csi.so.server.Server;
 import br.ufsm.csi.so.util.Header;
 import br.ufsm.csi.so.util.Resource;
+import br.ufsm.csi.so.util.QueryParams.Query;
 
 public class HomeController extends Controller {
-    Server server;
+    private Query query;
 
-    public HomeController(Server server) {
+    public HomeController(Query query) {
         super("home.html");
 
-        this.server = server;
+        this.query = query;
     }
 
     @Override
@@ -32,7 +33,9 @@ public class HomeController extends Controller {
 
         StringBuilder sb = new StringBuilder();
 
-        for (Reserva r : App.reservas) {
+        for (Map.Entry<Integer, Reserva> entry : App.reservas.entrySet()) {
+            Reserva r = entry.getValue();
+
             StringBuilder element = new StringBuilder();
 
             element.append("<a");
@@ -49,6 +52,16 @@ public class HomeController extends Controller {
         }
 
         html = html.replace("<!-- SEATS -->", sb.toString());
+
+        // TODO: Usar header para enviar a mensagem de sucesso
+        if (this.query.has("success")) {
+            StringBuilder element = new StringBuilder("<div class=\"message\">");
+
+            element.append("Assento reservado com sucesso!");
+            element.append("</div>");
+
+            html = html.replace("<!-- MESSAGE -->", element.toString());
+        }
 
         out.write(html.getBytes());
     }

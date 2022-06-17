@@ -4,16 +4,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
-import java.util.Map;
 import java.util.Scanner;
 
+import org.apache.commons.lang3.math.NumberUtils;
+
 import br.ufsm.csi.so.controller.CSSController;
+import br.ufsm.csi.so.controller.ConfirmController;
 import br.ufsm.csi.so.controller.HomeController;
 import br.ufsm.csi.so.controller.ImageController;
 import br.ufsm.csi.so.controller.RedirectController;
 import br.ufsm.csi.so.controller.ReservarController;
 import br.ufsm.csi.so.controller._404Controller;
 import br.ufsm.csi.so.util.QueryParams;
+import br.ufsm.csi.so.util.QueryParams.Query;
 
 public class Request implements Runnable {
     private Server server;
@@ -42,7 +45,7 @@ public class Request implements Runnable {
 
         QueryParams qs = new QueryParams(path);
         String directory = qs.directory;
-        Map<String, String> query = qs.query;
+        Query query = qs.query;
 
         System.out.println(method + " " + directory + " " + qs);
 
@@ -56,13 +59,20 @@ public class Request implements Runnable {
             controller = new ImageController(directory);
 
         if (directory.equals("/home") || directory.equals("/"))
-            controller = new HomeController(this.server);
+            controller = new HomeController(query);
 
         if (directory.equals("/reservar")) {
-            if (query.get("id") == null)
-                controller = new RedirectController();
-            else
+            if (query.get("id") != null)
                 controller = new ReservarController(query.get("id"));
+            else
+                controller = new RedirectController();
+        }
+
+        if (directory.equals("/confirmar")) {
+            if (NumberUtils.isCreatable(query.get("id")))
+                controller = new ConfirmController(query);
+            else
+                controller = new RedirectController();
         }
 
         // caso não exista a página

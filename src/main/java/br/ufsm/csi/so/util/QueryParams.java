@@ -1,18 +1,30 @@
 package br.ufsm.csi.so.util;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
 public class QueryParams {
     public final String directory;
-    public final Map<String, String> query;
+    public final Query query;
 
-    public QueryParams(String uri) {
+    public class Query extends HashMap<String, String> {
+        public Query() {
+            super();
+        }
+
+        public boolean has(String key) {
+            return this.containsKey(key);
+        }
+    }
+
+    public QueryParams(String uri) throws UnsupportedEncodingException {
         String directory = uri;
         String[] strings = uri.split("&");
 
-        Map<String, String> query = new HashMap<>();
+        Query query = new Query();
 
         if (uri.contains("?")) {
             for (int i = 0; i < strings.length; i++) {
@@ -28,7 +40,7 @@ public class QueryParams {
                 String[] pair = kvPair.split("=", 2);
 
                 if (pair.length == 2) {
-                    query.put(pair[0], pair[1]);
+                    query.put(pair[0], URLDecoder.decode(pair[1], "UTF-8"));
                 } else {
                     query.put(pair[0], null);
                 }
