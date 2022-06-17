@@ -5,7 +5,7 @@ import java.io.OutputStream;
 import java.net.Socket;
 
 import br.ufsm.csi.so.server.Controller;
-import br.ufsm.csi.so.util.RequestUtil;
+import br.ufsm.csi.so.util.Header;
 import br.ufsm.csi.so.util.Resource;
 
 public class CSSController extends Controller {
@@ -18,7 +18,7 @@ public class CSSController extends Controller {
 
         Resource resource = Resource.from(this.resource);
 
-        out.write(RequestUtil.getHeader(200, "text/css").getBytes());
+        out.write(new Header(200).mime("text/css").build().getBytes());
 
         out.write(resource.getHTML().getBytes());
     }

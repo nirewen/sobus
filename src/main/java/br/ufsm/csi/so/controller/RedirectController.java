@@ -6,21 +6,19 @@ import java.net.Socket;
 
 import br.ufsm.csi.so.server.Controller;
 import br.ufsm.csi.so.util.Header;
-import br.ufsm.csi.so.util.Resource;
 
-public class ImageController extends Controller {
-    public ImageController(String resource) {
-        super(resource);
+public class RedirectController extends Controller {
+    public RedirectController() {
+        super("");
     }
 
     @Override
     public void onGET(Socket socket) throws IOException {
         OutputStream out = socket.getOutputStream();
 
-        Resource resource = Resource.from(this.resource);
+        Header header = new Header(302)
+                .addHeader("Location: /home");
 
-        out.write(new Header(200).mime("image/png").build().getBytes());
-
-        out.write(resource.bytes);
+        out.write(header.build().getBytes());
     }
 }

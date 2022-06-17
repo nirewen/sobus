@@ -10,6 +10,7 @@ import java.util.Scanner;
 import br.ufsm.csi.so.controller.CSSController;
 import br.ufsm.csi.so.controller.HomeController;
 import br.ufsm.csi.so.controller.ImageController;
+import br.ufsm.csi.so.controller.RedirectController;
 import br.ufsm.csi.so.controller.ReservarController;
 import br.ufsm.csi.so.controller._404Controller;
 import br.ufsm.csi.so.util.QueryParams;
@@ -57,8 +58,12 @@ public class Request implements Runnable {
         if (directory.equals("/home") || directory.equals("/"))
             controller = new HomeController(this.server);
 
-        if (directory.equals("/reservar") && query.get("id") != null)
-            controller = new ReservarController(query.get("id"));
+        if (directory.equals("/reservar")) {
+            if (query.get("id") == null)
+                controller = new RedirectController();
+            else
+                controller = new ReservarController(query.get("id"));
+        }
 
         // caso não exista a página
         if (!controller.isValid())

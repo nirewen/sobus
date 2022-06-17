@@ -8,7 +8,7 @@ import br.ufsm.csi.so.App;
 import br.ufsm.csi.so.data.Reserva;
 import br.ufsm.csi.so.server.Controller;
 import br.ufsm.csi.so.server.Server;
-import br.ufsm.csi.so.util.RequestUtil;
+import br.ufsm.csi.so.util.Header;
 import br.ufsm.csi.so.util.Resource;
 
 public class HomeController extends Controller {
@@ -26,7 +26,7 @@ public class HomeController extends Controller {
 
         Resource resource = Resource.from(this.resource);
 
-        out.write(RequestUtil.getHeader(200).getBytes());
+        out.write(new Header(200).build().getBytes());
 
         String html = resource.getHTML();
 
