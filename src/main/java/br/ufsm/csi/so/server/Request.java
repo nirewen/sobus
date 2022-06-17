@@ -4,12 +4,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.util.Map;
 import java.util.Scanner;
 
 import br.ufsm.csi.so.controller.CSSController;
 import br.ufsm.csi.so.controller.HomeController;
 import br.ufsm.csi.so.controller.ImageController;
 import br.ufsm.csi.so.controller._404Controller;
+import br.ufsm.csi.so.util.QueryParams;
 
 public class Request implements Runnable {
     private Server server;
@@ -36,16 +38,20 @@ public class Request implements Runnable {
         String method = scanner.next();
         String path = scanner.next();
 
-        System.out.println(method + " " + path);
+        QueryParams qs = new QueryParams(path);
+        String directory = qs.directory;
+        Map<String, String> query = qs.query;
 
-        Controller controller = new Controller(path);
+        System.out.println(method + " " + directory + " " + qs);
+
+        Controller controller = new Controller(directory);
 
         // controlador de CSS
         if (path.startsWith("/css/"))
-            controller = new CSSController(path.substring(1));
+            controller = new CSSController(directory);
         // controlador de imagem
         if (path.startsWith("/img/"))
-            controller = new ImageController(path.substring(1));
+            controller = new ImageController(directory);
 
         if (path.equals("/home") || path.equals("/"))
             controller = new HomeController(this.server);
