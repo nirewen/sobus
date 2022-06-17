@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.Socket;
 
+import br.ufsm.csi.so.App;
+import br.ufsm.csi.so.data.Reserva;
 import br.ufsm.csi.so.server.Controller;
 import br.ufsm.csi.so.server.Server;
 import br.ufsm.csi.so.util.RequestUtil;
@@ -26,6 +28,24 @@ public class HomeController extends Controller {
 
         out.write(RequestUtil.getHeader(200).getBytes());
 
-        out.write(resource.getHTML().getBytes());
+        String html = resource.getHTML();
+
+        StringBuilder sb = new StringBuilder();
+
+        for (Reserva r : App.reservas) {
+            StringBuilder element = new StringBuilder();
+
+            element.append("<a ");
+            element.append("class=\"seat").append(r.isTaken() ? " occupied" : "").append("\" ");
+            element.append("href=\"/reservar?id=").append(r.getSeat()).append("\">");
+            element.append(r.getSeat());
+            element.append("</a>\n");
+
+            sb.append(element);
+        }
+
+        html = html.replace("<!-- SEATS -->", sb.toString());
+
+        out.write(html.getBytes());
     }
 }

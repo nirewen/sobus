@@ -23,6 +23,8 @@ public class Server {
             Request request = new Request(this, socket);
             Thread thread = new Thread(request);
 
+            thread.setName("Request");
+
             thread.start();
         }
     }
