@@ -20,7 +20,6 @@ public class ConfirmController extends Controller {
 
         this.query = query;
         this.mutex = mutex;
-
     }
 
     @Override
@@ -44,6 +43,8 @@ public class ConfirmController extends Controller {
             seat.setDate(date[0]);
             seat.setHour(date[1]);
             seat.setTaken(true);
+
+            App.logger.log(socket, seat);
 
             header.addHeader("Location: /home?success=true");
 
