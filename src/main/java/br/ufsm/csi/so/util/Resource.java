@@ -1,20 +1,18 @@
 package br.ufsm.csi.so.util;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+
+import lombok.SneakyThrows;
 
 public class Resource {
     public byte[] bytes;
     private String html;
 
+    @SneakyThrows
     public Resource(InputStream bytes) {
-        try {
-            this.bytes = bytes.readAllBytes();
-            this.html = new String(this.bytes, StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        this.bytes = bytes.readAllBytes();
+        this.html = new String(this.bytes, StandardCharsets.UTF_8);
     }
 
     public static Resource from(String resource) {

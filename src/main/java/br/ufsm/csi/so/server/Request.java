@@ -1,6 +1,5 @@
 package br.ufsm.csi.so.server;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
@@ -17,6 +16,7 @@ import br.ufsm.csi.so.controller.ReservarController;
 import br.ufsm.csi.so.controller._404Controller;
 import br.ufsm.csi.so.util.QueryParams;
 import br.ufsm.csi.so.util.QueryParams.Query;
+import lombok.SneakyThrows;
 
 public class Request implements Runnable {
     private Server server;
@@ -27,7 +27,8 @@ public class Request implements Runnable {
         this.socket = socket;
     }
 
-    public void execute() throws IOException, InterruptedException {
+    @SneakyThrows
+    public void execute() {
         InputStream in = this.socket.getInputStream();
         OutputStream out = this.socket.getOutputStream();
 
@@ -94,10 +95,6 @@ public class Request implements Runnable {
 
     @Override
     public void run() {
-        try {
-            this.execute();
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
+        this.execute();
     }
 }

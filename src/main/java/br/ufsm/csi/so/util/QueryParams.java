@@ -1,10 +1,11 @@
 package br.ufsm.csi.so.util;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+
+import lombok.SneakyThrows;
 
 public class QueryParams {
     public final String directory;
@@ -20,7 +21,8 @@ public class QueryParams {
         }
     }
 
-    public QueryParams(String uri) throws UnsupportedEncodingException {
+    @SneakyThrows
+    public QueryParams(String uri) {
         String directory = uri;
         String[] strings = uri.split("&");
 

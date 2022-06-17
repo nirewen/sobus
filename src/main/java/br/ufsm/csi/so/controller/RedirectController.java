@@ -1,11 +1,11 @@
 package br.ufsm.csi.so.controller;
 
-import java.io.IOException;
 import java.io.OutputStream;
 import java.net.Socket;
 
 import br.ufsm.csi.so.server.Controller;
 import br.ufsm.csi.so.util.Header;
+import lombok.SneakyThrows;
 
 public class RedirectController extends Controller {
     public RedirectController() {
@@ -13,7 +13,8 @@ public class RedirectController extends Controller {
     }
 
     @Override
-    public void onGET(Socket socket) throws IOException {
+    @SneakyThrows
+    public void onGET(Socket socket) {
         OutputStream out = socket.getOutputStream();
 
         Header header = new Header(302)

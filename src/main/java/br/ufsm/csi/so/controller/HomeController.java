@@ -1,6 +1,5 @@
 package br.ufsm.csi.so.controller;
 
-import java.io.IOException;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.util.Map;
@@ -11,6 +10,7 @@ import br.ufsm.csi.so.server.Controller;
 import br.ufsm.csi.so.util.Header;
 import br.ufsm.csi.so.util.Resource;
 import br.ufsm.csi.so.util.QueryParams.Query;
+import lombok.SneakyThrows;
 
 public class HomeController extends Controller {
     private Query query;
@@ -22,7 +22,8 @@ public class HomeController extends Controller {
     }
 
     @Override
-    public void onGET(Socket socket) throws IOException {
+    @SneakyThrows
+    public void onGET(Socket socket) {
         OutputStream out = socket.getOutputStream();
 
         Resource resource = Resource.from(this.resource);
