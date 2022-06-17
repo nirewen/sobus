@@ -2,7 +2,6 @@ package br.ufsm.csi.so.controller;
 
 import java.io.OutputStream;
 import java.net.Socket;
-import java.util.Map;
 
 import br.ufsm.csi.so.App;
 import br.ufsm.csi.so.data.Seat;
@@ -30,40 +29,45 @@ public class HomeController extends Controller {
 
         out.write(new Header(200).build().getBytes());
 
-        String html = resource.getHTML();
+        String content = resource.getContent();
 
         StringBuilder sb = new StringBuilder();
 
-        for (Map.Entry<Integer, Seat> entry : App.seats.entrySet()) {
-            Seat r = entry.getValue();
-
+        for (Seat seat : App.seats.values()) {
             StringBuilder element = new StringBuilder();
 
             element.append("<a");
-            element.append(" class=\"seat").append(r.isTaken() ? " occupied" : "").append("\"");
+            element.append(" class=\"seat").append(seat.isTaken() ? " occupied" : "").append("\"");
 
-            if (!r.isTaken())
-                element.append(" href=\"/reservar?id=").append(r.getId()).append("\"");
+            if (!seat.isTaken())
+                element.append(" href=\"/reservar?id=").append(seat.getId()).append("\"");
 
             element.append(">");
-            element.append(r.getId());
+            element.append(seat.getId());
             element.append("</a>\n");
 
             sb.append(element);
         }
 
-        html = html.replace("<!-- SEATS -->", sb.toString());
+        content = content.replace("<!-- SEATS -->", sb.toString());
 
         // TODO: Usar header para enviar a mensagem de sucesso
         if (this.query.has("success")) {
-            StringBuilder element = new StringBuilder("<div class=\"message\">");
+            StringBuilder element = new StringBuilder("<div class=\"message success\">");
 
             element.append("Assento reservado com sucesso!");
             element.append("</div>");
 
-            html = html.replace("<!-- MESSAGE -->", element.toString());
+            content = content.replace("<!-- MESSAGE -->", element.toString());
+        } else if (this.query.has("failure")) {
+            StringBuilder element = new StringBuilder("<div class=\"message failure\">");
+
+            element.append("Ocorreu um erro ao reservar o assento");
+            element.append("</div>");
+
+            content = content.replace("<!-- MESSAGE -->", element.toString());
         }
 
-        out.write(html.getBytes());
+        out.write(content.getBytes());
     }
 }

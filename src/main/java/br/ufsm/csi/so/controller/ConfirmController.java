@@ -56,6 +56,5 @@ public class ConfirmController extends Controller {
         }
 
         out.write(header.build().getBytes());
-
     }
 }

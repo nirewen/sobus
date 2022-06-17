@@ -21,6 +21,6 @@ public class CSSController extends Controller {
 
         out.write(new Header(200).mime("text/css").build().getBytes());
 
-        out.write(resource.getHTML().getBytes());
+        out.write(resource.getContent().getBytes());
     }
 }

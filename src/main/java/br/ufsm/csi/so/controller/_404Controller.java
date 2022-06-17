@@ -22,7 +22,7 @@ public class _404Controller extends Controller {
 
         out.write(new Header(404).build().getBytes());
 
-        out.write(resource.getHTML().getBytes());
+        out.write(resource.getContent().getBytes());
     }
 
     @Override
@@ -34,6 +34,6 @@ public class _404Controller extends Controller {
 
         out.write(new Header(404).build().getBytes());
 
-        out.write(resource.getHTML().getBytes());
+        out.write(resource.getContent().getBytes());
     }
 }

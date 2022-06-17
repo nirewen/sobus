@@ -7,12 +7,12 @@ import lombok.SneakyThrows;
 
 public class Resource {
     public byte[] bytes;
-    private String html;
+    private String content;
 
     @SneakyThrows
     public Resource(InputStream bytes) {
         this.bytes = bytes.readAllBytes();
-        this.html = new String(this.bytes, StandardCharsets.UTF_8);
+        this.content = new String(this.bytes, StandardCharsets.UTF_8);
     }
 
     public static Resource from(String resource) {
@@ -27,7 +27,7 @@ public class Resource {
         return new Resource(is);
     }
 
-    public String getHTML() {
-        return this.html;
+    public String getContent() {
+        return this.content;
     }
 }

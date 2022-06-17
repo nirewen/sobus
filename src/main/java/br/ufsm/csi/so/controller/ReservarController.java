@@ -26,10 +26,10 @@ public class ReservarController extends Controller {
 
         out.write(new Header(200).build().getBytes());
 
-        String html = resource.getHTML();
+        String content = resource.getContent();
 
-        html = html.replaceAll("<!-- SEAT -->", this.seat);
+        content = content.replaceAll("<!-- SEAT -->", this.seat);
 
-        out.write(html.getBytes());
+        out.write(content.getBytes());
     }
 }
