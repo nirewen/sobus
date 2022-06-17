@@ -3,11 +3,54 @@
     font-family: sans-serif;
 }
 
+body,
+html {
+    height: 100vh;
+}
+
 body {
     margin: 0;
+    background-color: #1d1919;
 }
 
 .navbar {
     display: flex;
     height: 48px;
+    background-color: #b58d08;
+}
+
+main {
+    display: flex;
+}
+
+.bus {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 0.3em 2em;
+    flex: 1;
+    aspect-ratio: 2/1;
+    margin: 0 15%;
+    padding: 11% 20% 11% 8%;
+    background-image: url(/img/Bus.png);
+    background-size: cover;
+}
+
+.bus .seat {
+    display: grid;
+    place-items: center;
+
+    width: 50px;
+    height: 50px;
+
+    background-color: #8dd6ff;
+    color: #000000;
+
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.bus .seat.occupied {
+    background-color: #ff0000;
+    color: #ffffff;
 }
