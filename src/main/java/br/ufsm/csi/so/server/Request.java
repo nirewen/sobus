@@ -10,6 +10,7 @@ import java.util.Scanner;
 import br.ufsm.csi.so.controller.CSSController;
 import br.ufsm.csi.so.controller.HomeController;
 import br.ufsm.csi.so.controller.ImageController;
+import br.ufsm.csi.so.controller.ReservarController;
 import br.ufsm.csi.so.controller._404Controller;
 import br.ufsm.csi.so.util.QueryParams;
 
@@ -53,12 +54,11 @@ public class Request implements Runnable {
         if (path.startsWith("/img/"))
             controller = new ImageController(directory);
 
-        if (path.equals("/home") || path.equals("/"))
+        if (path.startsWith("/home") || path.equals("/"))
             controller = new HomeController(this.server);
-        // if (path.equals("/reservar"))
-        // file = "reservar.html";
-        // if (path.equals("/confirmar"))
-        // file = "home.html";
+
+        if (path.startsWith("/reservar"))
+            controller = new ReservarController();
 
         // caso não exista a página
         if (!controller.isValid())

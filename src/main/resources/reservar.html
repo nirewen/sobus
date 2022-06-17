@@ -14,8 +14,17 @@
             </a>
         </nav>
         <main>
-            <div class="bus">
-                <!-- SEATS -->
+            <div class="container">
+                <form action="/confirmar" method="get">
+                    <div class="control">
+                        <label for="name">Seu nome:</label>
+                        <input type="text" name="name" id="name" />
+                    </div>
+                    <div class="control">
+                        <label for="date">Data da reserva:</label>
+                        <input type="datetime-local" name="date" id="date" />
+                    </div>
+                </form>
             </div>
         </main>
     </body>

@@ -19,6 +19,10 @@ body {
     background-color: #b58d08;
 }
 
+.navbar a .logo {
+    height: 100%;
+}
+
 main {
     display: flex;
 }
