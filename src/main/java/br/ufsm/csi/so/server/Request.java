@@ -27,7 +27,7 @@ public class Request implements Runnable {
         this.socket = socket;
     }
 
-    public void execute() throws IOException {
+    public void execute() throws IOException, InterruptedException {
         InputStream in = this.socket.getInputStream();
         OutputStream out = this.socket.getOutputStream();
 
@@ -70,7 +70,7 @@ public class Request implements Runnable {
 
         if (directory.equals("/confirmar")) {
             if (NumberUtils.isCreatable(query.get("id")))
-                controller = new ConfirmController(query);
+                controller = new ConfirmController(this.server.mutex, query);
             else
                 controller = new RedirectController();
         }
@@ -96,7 +96,7 @@ public class Request implements Runnable {
     public void run() {
         try {
             this.execute();
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
     }
