@@ -164,7 +164,8 @@ input {
 
 .message {
     margin: 2% 15%;
-    padding: 2%;
+    margin-bottom: -1%;
+    padding: 1% 2%;
     border-radius: 7px;
     background-color: #ffffff;
 }
