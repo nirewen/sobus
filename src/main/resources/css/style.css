@@ -17,18 +17,7 @@ body {
     display: flex;
     height: 48px;
     background-color: #b58d08;
-    padding: 0 15%;
-}
-
-.navbar a {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 24px;
-    text-decoration: none;
-    font-weight: 700;
-    color: white;
-    text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
+    padding: 4px 15%;
 }
 
 .navbar a .logo {
