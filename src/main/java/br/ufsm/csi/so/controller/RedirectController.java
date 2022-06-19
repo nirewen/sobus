@@ -13,6 +13,11 @@ public class RedirectController extends Controller {
     }
 
     @Override
+    public boolean isValid() {
+        return true;
+    }
+
+    @Override
     @SneakyThrows
     public void onGET(Socket socket) {
         OutputStream out = socket.getOutputStream();
