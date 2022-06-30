@@ -13,11 +13,14 @@ public class Server {
     public void listen(int port) {
         this.server = new ServerSocket(port);
 
+        // printar a porta que está rodando o servidor
         Terminal.printPort(port);
 
         while (true) {
+            // aceitar o socket
             Socket socket = this.server.accept();
 
+            // criar uma nova conexão - Connection é Runnable
             Connection connection = new Connection(socket);
             Thread thread = new Thread(connection);
 

@@ -2,6 +2,7 @@ package br.ufsm.csi.so.util;
 
 import br.ufsm.csi.so.data.Seat;
 
+// é o printas
 public class Terminal {
     public static void printRequest(String method, String directory, QueryParams query) {
         StringBuilder sb = new StringBuilder();

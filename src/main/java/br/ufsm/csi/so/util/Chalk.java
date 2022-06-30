@@ -1,5 +1,6 @@
 package br.ufsm.csi.so.util;
 
+// CORES NO TERMINAL
 public class Chalk {
     private final String ESC = "\u001B";
     private String finalText = "";

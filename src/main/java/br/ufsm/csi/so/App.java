@@ -8,10 +8,14 @@ import br.ufsm.csi.so.data.Seat;
 import br.ufsm.csi.so.server.Server;
 
 public class App {
+    // Criar um map dos assentos do aplicativo
+    // Mapeado para ID do assento -> Assento
     public static Map<Integer, Seat> seats = new HashMap<>();
+    // Criar o logger de forma global
     public static Logger logger = new Logger();
 
     public static void main(String[] args) {
+        // Gerar os assentos, de 1 a 24
         for (int i = 1; i <= 24; i++) {
             seats.put(i, new Seat(i));
         }

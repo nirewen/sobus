@@ -22,8 +22,10 @@ public class ReservarController extends Controller {
     public void onGET(Request req, Response res) {
         Resource resource = Resource.from(this.resource);
 
+        // pegar o assento informado pelo id
         Seat seat = App.seats.get(Integer.parseInt(this.seat));
 
+        // se o assento está ocupado (usuario digitou o url manualmente)
         if (seat.isTaken()) {
             res.redirect("/home?failure=true").send();
 
@@ -32,6 +34,7 @@ public class ReservarController extends Controller {
 
         String content = resource.getContent();
 
+        // substituir o id no html
         content = content.replaceAll("<!-- SEAT -->", this.seat);
 
         res.send(content);

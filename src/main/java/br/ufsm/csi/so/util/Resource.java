@@ -5,6 +5,8 @@ import java.nio.charset.StandardCharsets;
 
 import lombok.SneakyThrows;
 
+// pegar arquivos da pasta resource
+// salva os bytes e o conteúdo como string
 public class Resource {
     public byte[] bytes;
     private String content;

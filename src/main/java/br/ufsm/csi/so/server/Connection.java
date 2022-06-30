@@ -40,6 +40,7 @@ public class Connection implements Runnable {
             return;
         }
 
+        // GET /home?algo=aqui
         String method = scanner.next();
         String path = scanner.next();
 
@@ -60,9 +61,11 @@ public class Connection implements Runnable {
         if (directory.startsWith("/img/"))
             controller = new ImageController(directory);
 
+        // controlador da index
         if (directory.equals("/home") || directory.equals("/"))
             controller = new HomeController(query);
 
+        // controlador da página de reserva
         if (directory.equals("/reservar")) {
             if (query.get("id") != null)
                 controller = new ReservarController(query.get("id"));
@@ -87,6 +90,7 @@ public class Connection implements Runnable {
         if (method.equals("POST"))
             controller.onPOST(req, res);
 
+        // é o fechas
         in.close();
         out.close();
 

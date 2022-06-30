@@ -1,5 +1,6 @@
 package br.ufsm.csi.so.data;
 
+// classe modelo dos Assentos
 public class Seat {
     private int id;
     private String name;

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+// gera elementos HTML
 public class Element {
     private String tag;
     private List<String> classes = new ArrayList<>();

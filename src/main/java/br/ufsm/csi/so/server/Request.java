@@ -9,7 +9,10 @@ public class Request {
     public final String directory;
     public final QueryParams query;
 
+    // armazena os parâmetros vindos da URL
     public Request(Socket socket, String path) {
+        // cria um map de parametros passados na URL
+        // nome -> valor
         QueryParams qs = new QueryParams(path);
 
         this.socket = socket;

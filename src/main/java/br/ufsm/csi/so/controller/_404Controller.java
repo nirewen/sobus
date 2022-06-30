@@ -6,6 +6,7 @@ import br.ufsm.csi.so.server.Response;
 import br.ufsm.csi.so.util.Resource;
 import lombok.SneakyThrows;
 
+// para requests de páginas inexistentes
 public class _404Controller extends Controller {
     public _404Controller() {
         super("_404.html");

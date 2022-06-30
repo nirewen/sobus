@@ -13,6 +13,7 @@ public class Header {
         this.setStatus(this.code);
     }
 
+    // define o nome do status
     private void setStatus(int code) {
         this.status = switch (this.code) {
             case 200 -> "OK";
@@ -37,6 +38,7 @@ public class Header {
         return this;
     }
 
+    // adicionar headers extra
     public Header addHeader(String header) {
         this.headers.add(header);
 
@@ -44,9 +46,12 @@ public class Header {
     }
 
     public String build() {
+        // inicializa o StringBuilder
         StringBuilder sb = new StringBuilder("HTTP/1.1");
 
+        // adicionar o código e o status no header
         sb.append(String.format(" %d %s\n", this.code, this.status));
+        // adicionar o mime type
         sb.append(String.format("Content-Type: %s; charset=UTF-8", this.mimeType));
 
         for (String header : this.headers)

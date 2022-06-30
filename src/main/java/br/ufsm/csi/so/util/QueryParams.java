@@ -23,8 +23,10 @@ public class QueryParams {
 
     @SneakyThrows
     public QueryParams(String uri) {
+        // /confirmar?id=1&date=2022-01-20T20
         String directory = uri;
         String[] strings = uri.split("&");
+        // splitado: /confirmar?id=1, date=2022-01-20T20
 
         Params query = new Params();
 
@@ -34,6 +36,7 @@ public class QueryParams {
 
                 if (i == 0) {
                     String[] firstPair = kvPair.split("\\?");
+                    // splitado: /confirmar, id=1
 
                     directory = firstPair[0];
                     kvPair = firstPair[1];

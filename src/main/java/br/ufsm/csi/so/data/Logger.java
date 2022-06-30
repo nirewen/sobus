@@ -17,11 +17,13 @@ public class Logger {
 
     @SneakyThrows
     public Logger() {
+        // Criar o arquivo de log - se já criado, retorna false
         if (file.createNewFile()) {
             Terminal.printLogFile(file.getName());
         }
     }
 
+    // cria um novo log
     public void log(Socket socket, Seat seat) {
         this.socket = socket;
         this.seat = seat;
@@ -77,9 +79,12 @@ public class Logger {
         @SneakyThrows
         public void run() {
             synchronized (logString) {
+                // criar um novo escritor de arquivo
                 FileWriter writer = new FileWriter(file.getName(), true);
 
+                // escreve no arquivo de log
                 writer.write(logString);
+                // fechar a abertura do arquivo
                 writer.close();
             }
         }

@@ -5,6 +5,7 @@ import br.ufsm.csi.so.server.Request;
 import br.ufsm.csi.so.server.Response;
 import lombok.SneakyThrows;
 
+// redirecionar para a página inicial
 public class RedirectController extends Controller {
     public RedirectController() {
         super("");

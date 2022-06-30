@@ -21,14 +21,17 @@ public class ConfirmController extends Controller {
     @Override
     @SneakyThrows
     public void onGET(Request req, Response res) {
+        // pegar os campos pela url
         int id = Integer.parseInt(req.query.params.get("id"));
         String name = req.query.params.get("name");
         String[] date = req.query.params.get("date").split("T");
 
+        // pegar o assento a partir do id enviado
         Seat seat = App.seats.get(id);
 
         // id válido & data válida & assento vago
         if (seat != null && date.length == 2 && !seat.isTaken()) {
+            // trancar o mapa de assentos
             synchronized (App.seats) {
                 seat.setName(name);
                 seat.setDate(date[0]);

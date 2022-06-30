@@ -6,6 +6,7 @@ import br.ufsm.csi.so.server.Response;
 import br.ufsm.csi.so.util.Resource;
 import lombok.SneakyThrows;
 
+// para casos de request de css
 public class CSSController extends Controller {
     public CSSController(String resource) {
         super(resource);

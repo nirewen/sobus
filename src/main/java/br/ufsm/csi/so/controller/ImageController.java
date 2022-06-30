@@ -6,6 +6,7 @@ import br.ufsm.csi.so.server.Response;
 import br.ufsm.csi.so.util.Resource;
 import lombok.SneakyThrows;
 
+// para casos de request de imagem
 public class ImageController extends Controller {
     public ImageController(String resource) {
         super(resource);
