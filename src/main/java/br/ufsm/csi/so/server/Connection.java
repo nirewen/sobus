@@ -19,11 +19,9 @@ import br.ufsm.csi.so.util.QueryParams.Params;
 import lombok.SneakyThrows;
 
 public class Connection implements Runnable {
-    private Server server;
     private Socket socket;
 
-    public Connection(Server server, Socket socket) {
-        this.server = server;
+    public Connection(Socket socket) {
         this.socket = socket;
     }
 
@@ -74,7 +72,7 @@ public class Connection implements Runnable {
 
         if (directory.equals("/confirmar")) {
             if (NumberUtils.isCreatable(query.get("id")))
-                controller = new ConfirmController(this.server.mutex);
+                controller = new ConfirmController();
             else
                 controller = new RedirectController();
         }

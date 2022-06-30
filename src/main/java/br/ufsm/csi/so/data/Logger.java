@@ -3,17 +3,12 @@ package br.ufsm.csi.so.data;
 import java.io.File;
 import java.io.FileWriter;
 import java.net.Socket;
-import java.util.concurrent.Semaphore;
 
 import br.ufsm.csi.so.util.Terminal;
 import lombok.SneakyThrows;
 
 public class Logger {
     private String logString = "";
-
-    private Semaphore vazio = new Semaphore(1000);
-    private Semaphore cheio = new Semaphore(0);
-    private Semaphore mutex = new Semaphore(1);
 
     private File file = new File("reservas.log");
 
@@ -45,39 +40,36 @@ public class Logger {
         @Override
         @SneakyThrows
         public void run() {
-            mutex.acquire();
-            String ip = socket.getInetAddress().toString();
-            StringBuilder sb = new StringBuilder();
+            synchronized (logString) {
+                String ip = socket.getInetAddress().toString();
+                StringBuilder sb = new StringBuilder();
 
-            // adicionar ip
-            sb.append("[IP: ")
-                    .append(ip)
-                    .append("] ");
+                // adicionar ip
+                sb.append("[IP: ")
+                        .append(ip)
+                        .append("] ");
 
-            // adicionar nome
-            sb.append("[NOME: ")
-                    .append(seat.getName())
-                    .append("] ");
+                // adicionar nome
+                sb.append("[NOME: ")
+                        .append(seat.getName())
+                        .append("] ");
 
-            // adicionar assento reservado
-            sb.append("[ASSENTO: ")
-                    .append(seat.getId())
-                    .append("] ");
+                // adicionar assento reservado
+                sb.append("[ASSENTO: ")
+                        .append(seat.getId())
+                        .append("] ");
 
-            // adicionar data
-            sb.append("[DATA: ")
-                    .append(seat.getDate())
-                    .append(" ")
-                    .append(seat.getHour())
-                    .append("]");
+                // adicionar data
+                sb.append("[DATA: ")
+                        .append(seat.getDate())
+                        .append(" ")
+                        .append(seat.getHour())
+                        .append("]");
 
-            sb.append("\n");
+                sb.append("\n");
 
-            logString = sb.toString();
-
-            vazio.acquire(logString.length());
-            cheio.release();
-            mutex.release();
+                logString = sb.toString();
+            }
         }
     }
 
@@ -85,17 +77,12 @@ public class Logger {
         @Override
         @SneakyThrows
         public void run() {
-            mutex.acquire();
-            cheio.acquire();
+            synchronized (logString) {
+                FileWriter writer = new FileWriter(file.getName(), true);
 
-            vazio.release(logString.length());
-
-            FileWriter writer = new FileWriter(file.getName(), true);
-
-            writer.write(logString);
-            writer.close();
-
-            mutex.release();
+                writer.write(logString);
+                writer.close();
+            }
         }
     }
 }

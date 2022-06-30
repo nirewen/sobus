@@ -1,7 +1,5 @@
 package br.ufsm.csi.so.controller;
 
-import java.util.concurrent.Semaphore;
-
 import br.ufsm.csi.so.App;
 import br.ufsm.csi.so.data.Seat;
 import br.ufsm.csi.so.server.Controller;
@@ -11,12 +9,8 @@ import br.ufsm.csi.so.util.Terminal;
 import lombok.SneakyThrows;
 
 public class ConfirmController extends Controller {
-    private Semaphore mutex;
-
-    public ConfirmController(Semaphore mutex) {
+    public ConfirmController() {
         super("");
-
-        this.mutex = mutex;
     }
 
     @Override
@@ -35,19 +29,17 @@ public class ConfirmController extends Controller {
 
         // id válido & data válida & assento vago
         if (seat != null && date.length == 2 && !seat.isTaken()) {
-            this.mutex.acquire();
+            synchronized (App.seats) {
+                seat.setName(name);
+                seat.setDate(date[0]);
+                seat.setHour(date[1]);
+                seat.setTaken(true);
 
-            seat.setName(name);
-            seat.setDate(date[0]);
-            seat.setHour(date[1]);
-            seat.setTaken(true);
+                App.logger.log(req.socket, seat);
+                Terminal.printLog(seat);
 
-            App.logger.log(req.socket, seat);
-            Terminal.printLog(seat);
-
-            res.redirect("/home?success=true");
-
-            this.mutex.release();
+                res.redirect("/home?success=true");
+            }
         } else {
             res.redirect("/home?failure=true");
         }
