@@ -38,7 +38,6 @@ public class Logger {
 
     private class ProduzLog implements Runnable {
         @Override
-        @SneakyThrows
         public void run() {
             synchronized (logString) {
                 String ip = socket.getInetAddress().toString();
