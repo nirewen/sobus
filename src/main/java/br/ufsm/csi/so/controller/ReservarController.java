@@ -1,10 +1,10 @@
 package br.ufsm.csi.so.controller;
 
-import java.io.OutputStream;
-import java.net.Socket;
-
+import br.ufsm.csi.so.App;
+import br.ufsm.csi.so.data.Seat;
 import br.ufsm.csi.so.server.Controller;
-import br.ufsm.csi.so.util.Header;
+import br.ufsm.csi.so.server.Request;
+import br.ufsm.csi.so.server.Response;
 import br.ufsm.csi.so.util.Resource;
 import lombok.SneakyThrows;
 
@@ -19,17 +19,21 @@ public class ReservarController extends Controller {
 
     @Override
     @SneakyThrows
-    public void onGET(Socket socket) {
-        OutputStream out = socket.getOutputStream();
-
+    public void onGET(Request req, Response res) {
         Resource resource = Resource.from(this.resource);
 
-        out.write(new Header(200).build().getBytes());
+        Seat seat = App.seats.get(Integer.parseInt(this.seat));
+
+        if (seat.isTaken()) {
+            res.redirect("/home?failure=true").send();
+
+            return;
+        }
 
         String content = resource.getContent();
 
         content = content.replaceAll("<!-- SEAT -->", this.seat);
 
-        out.write(content.getBytes());
+        res.send(content);
     }
 }

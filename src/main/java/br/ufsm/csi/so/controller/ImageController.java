@@ -1,10 +1,8 @@
 package br.ufsm.csi.so.controller;
 
-import java.io.OutputStream;
-import java.net.Socket;
-
 import br.ufsm.csi.so.server.Controller;
-import br.ufsm.csi.so.util.Header;
+import br.ufsm.csi.so.server.Request;
+import br.ufsm.csi.so.server.Response;
 import br.ufsm.csi.so.util.Resource;
 import lombok.SneakyThrows;
 
@@ -15,13 +13,9 @@ public class ImageController extends Controller {
 
     @Override
     @SneakyThrows
-    public void onGET(Socket socket) {
-        OutputStream out = socket.getOutputStream();
-
+    public void onGET(Request req, Response res) {
         Resource resource = Resource.from(this.resource);
 
-        out.write(new Header(200).mime("image/png").build().getBytes());
-
-        out.write(resource.bytes);
+        res.mime("image/png").send(resource.bytes);
     }
 }

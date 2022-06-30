@@ -9,10 +9,10 @@ import lombok.SneakyThrows;
 
 public class QueryParams {
     public final String directory;
-    public final Query query;
+    public final Params params;
 
-    public class Query extends HashMap<String, String> {
-        public Query() {
+    public class Params extends HashMap<String, String> {
+        public Params() {
             super();
         }
 
@@ -26,7 +26,7 @@ public class QueryParams {
         String directory = uri;
         String[] strings = uri.split("&");
 
-        Query query = new Query();
+        Params query = new Params();
 
         if (uri.contains("?")) {
             for (int i = 0; i < strings.length; i++) {
@@ -50,17 +50,17 @@ public class QueryParams {
         }
 
         this.directory = directory;
-        this.query = query;
+        this.params = query;
     }
 
     public String toString() {
-        if (this.query.size() == 0)
+        if (this.params.size() == 0)
             return "";
 
         StringBuilder sb = new StringBuilder()
                 .append(Chalk.of("{ ").yellow());
 
-        Iterator<Map.Entry<String, String>> it = this.query.entrySet().iterator();
+        Iterator<Map.Entry<String, String>> it = this.params.entrySet().iterator();
 
         while (it.hasNext()) {
             Map.Entry<String, String> entry = it.next();
