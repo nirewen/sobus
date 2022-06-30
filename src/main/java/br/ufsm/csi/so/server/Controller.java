@@ -1,11 +1,5 @@
 package br.ufsm.csi.so.server;
 
-import java.io.OutputStream;
-import java.net.Socket;
-
-import br.ufsm.csi.so.util.Header;
-import lombok.SneakyThrows;
-
 public class Controller {
     public final String resource;
 
@@ -20,21 +14,11 @@ public class Controller {
         return this.getClass().getClassLoader().getResource(this.resource) != null;
     }
 
-    @SneakyThrows
-    public void onGET(Socket socket) {
-        OutputStream out = socket.getOutputStream();
-
-        out.write(new Header(405).build().getBytes());
-
-        out.write("Erro: Rota não implementa método GET".getBytes());
+    public void onGET(Request req, Response res) {
+        res.status(405).send("Erro: Rota não implementa método GET");
     }
 
-    @SneakyThrows
-    public void onPOST(Socket socket) {
-        OutputStream out = socket.getOutputStream();
-
-        out.write(new Header(405).build().getBytes());
-
-        out.write("Erro: Rota não implementa método POST".getBytes());
+    public void onPOST(Request req, Response res) {
+        res.status(405).send("Erro: Rota não implementa método GET");
     }
 }

@@ -23,10 +23,11 @@ public class Server {
 
         while (true) {
             Socket socket = this.server.accept();
-            Request request = new Request(this, socket);
-            Thread thread = new Thread(request);
 
-            thread.setName("Request");
+            Connection connection = new Connection(this, socket);
+            Thread thread = new Thread(connection);
+
+            thread.setName("Connection");
 
             thread.start();
         }
