@@ -1,5 +1,7 @@
 package br.ufsm.csi.so.controller;
 
+import br.ufsm.csi.so.App;
+import br.ufsm.csi.so.data.Seat;
 import br.ufsm.csi.so.server.Controller;
 import br.ufsm.csi.so.server.Request;
 import br.ufsm.csi.so.server.Response;
@@ -19,6 +21,14 @@ public class ReservarController extends Controller {
     @SneakyThrows
     public void onGET(Request req, Response res) {
         Resource resource = Resource.from(this.resource);
+
+        Seat seat = App.seats.get(Integer.parseInt(this.seat));
+
+        if (seat.isTaken()) {
+            res.redirect("/home?failure=true").send();
+
+            return;
+        }
 
         String content = resource.getContent();
 
