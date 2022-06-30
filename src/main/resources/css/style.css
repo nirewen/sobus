@@ -38,7 +38,7 @@ main .center {
 
 .bus {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(4, 1fr);
     gap: 5% 6%;
     flex: 1;
@@ -79,6 +79,7 @@ main .center {
     background-color: #ff0000;
     color: #ffffff;
     position: relative;
+    user-select: none;
 }
 
 .bus .seat.occupied:hover::before {

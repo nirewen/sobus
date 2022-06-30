@@ -12,7 +12,7 @@ public class App {
     public static Logger logger = new Logger();
 
     public static void main(String[] args) {
-        for (int i = 1; i <= 20; i++) {
+        for (int i = 1; i <= 24; i++) {
             seats.put(i, new Seat(i));
         }
 
