@@ -19,6 +19,6 @@ public class Controller {
     }
 
     public void onPOST(Request req, Response res) {
-        res.status(405).send("Erro: Rota não implementa método GET");
+        res.status(405).send("Erro: Rota não implementa método POST");
     }
 }
