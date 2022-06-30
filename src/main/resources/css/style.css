@@ -136,6 +136,7 @@ main .center {
     margin: 0;
     text-transform: uppercase;
     font-weight: 800;
+    color: #000000;
 }
 
 .btn {
@@ -159,6 +160,7 @@ main .center {
 label {
     font-weight: bold;
     text-transform: uppercase;
+    color: #000000;
 }
 
 input {
