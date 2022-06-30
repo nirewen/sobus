@@ -46,7 +46,7 @@ public class Connection implements Runnable {
         String path = scanner.next();
 
         Request req = new Request(socket, path);
-        Response res = new Response(socket.getOutputStream());
+        Response res = new Response(out);
 
         String directory = req.directory;
         Params query = req.query.params;
