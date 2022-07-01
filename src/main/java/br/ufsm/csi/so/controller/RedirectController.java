@@ -6,8 +6,12 @@ import br.ufsm.csi.so.server.Response;
 import lombok.SneakyThrows;
 
 public class RedirectController extends Controller {
-    public RedirectController() {
+    private String redirectTo;
+
+    public RedirectController(String redirectTo) {
         super("");
+
+        this.redirectTo = redirectTo;
     }
 
     @Override
@@ -18,6 +22,6 @@ public class RedirectController extends Controller {
     @Override
     @SneakyThrows
     public void onGET(Request req, Response res) {
-        res.redirect("/home");
+        res.redirect(this.redirectTo);
     }
 }

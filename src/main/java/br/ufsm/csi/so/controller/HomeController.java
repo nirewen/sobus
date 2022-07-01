@@ -7,16 +7,11 @@ import br.ufsm.csi.so.server.Request;
 import br.ufsm.csi.so.server.Response;
 import br.ufsm.csi.so.util.Element;
 import br.ufsm.csi.so.util.Resource;
-import br.ufsm.csi.so.util.QueryParams.Params;
 import lombok.SneakyThrows;
 
 public class HomeController extends Controller {
-    private Params query;
-
-    public HomeController(Params query) {
+    public HomeController() {
         super("home.html");
-
-        this.query = query;
     }
 
     @Override
@@ -46,13 +41,13 @@ public class HomeController extends Controller {
         content = content.replace("<!-- SEATS -->", sb.toString());
 
         // TODO: Usar header para enviar a mensagem de sucesso
-        if (this.query.has("success")) {
+        if (req.query.params.has("success")) {
             Element element = new Element("div")
                     .setClass("message success")
                     .content("Assento reservado com sucesso!");
 
             content = content.replace("<!-- MESSAGE -->", element.toString());
-        } else if (this.query.has("failure")) {
+        } else if (req.query.params.has("failure")) {
             Element element = new Element("div")
                     .setClass("message failure")
                     .content("Ocorreu um erro ao reservar o assento");

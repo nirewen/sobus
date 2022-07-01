@@ -9,20 +9,17 @@ import br.ufsm.csi.so.util.Resource;
 import lombok.SneakyThrows;
 
 public class ReservarController extends Controller {
-    private String seat;
-
-    public ReservarController(String seat) {
+    public ReservarController() {
         super("reservar.html");
-
-        this.seat = seat;
     }
 
     @Override
     @SneakyThrows
     public void onGET(Request req, Response res) {
+        String id = req.query.params.get("id");
         Resource resource = Resource.from(this.resource);
 
-        Seat seat = App.seats.get(Integer.parseInt(this.seat));
+        Seat seat = App.seats.get(Integer.parseInt(id));
 
         if (seat.isTaken()) {
             res.redirect("/home?failure=true").send();
@@ -32,7 +29,7 @@ public class ReservarController extends Controller {
 
         String content = resource.getContent();
 
-        content = content.replaceAll("<!-- SEAT -->", this.seat);
+        content = content.replaceAll("<!-- SEAT -->", id);
 
         res.send(content);
     }

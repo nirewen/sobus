@@ -61,20 +61,20 @@ public class Connection implements Runnable {
             controller = new ImageController(directory);
 
         if (directory.equals("/home") || directory.equals("/"))
-            controller = new HomeController(query);
+            controller = new HomeController();
 
         if (directory.equals("/reservar")) {
             if (query.get("id") != null)
-                controller = new ReservarController(query.get("id"));
+                controller = new ReservarController();
             else
-                controller = new RedirectController();
+                controller = new RedirectController("/home?failure=true");
         }
 
         if (directory.equals("/confirmar")) {
             if (NumberUtils.isCreatable(query.get("id")))
                 controller = new ConfirmController();
             else
-                controller = new RedirectController();
+                controller = new RedirectController("/home?failure=true");
         }
 
         // caso não exista a página
