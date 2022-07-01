@@ -25,3 +25,7 @@ O usuário escolhe o assento desejado e informa seu nome, data e hora para confi
 Assentos reservados não possuem evento click, mas sim um evento de mouse que mostra os dados do usuário que reservou o assento.
 
 Ao confirmar a reserva, uma entrada no arquivo de log `reservas.log` é adicionada, informando o IP, nome, data e hora e o assento reservado.
+
+### Versão simplificada
+
+[ReservOnibus](https://gitlab.com/nirewen/reservonibus) - Uma versão simplificada e comentada do projeto, pra ajudar quem não tinha entendido a implementar o próprio.
