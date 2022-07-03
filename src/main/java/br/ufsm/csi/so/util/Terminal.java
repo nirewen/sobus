@@ -27,7 +27,6 @@ public class Terminal {
         StringBuilder sb = new StringBuilder();
 
         sb.append(Chalk.of(" LOG ").white().bgDarkMagenta());
-        sb.append(Chalk.of(" + FILA ").white().bgMagenta()).append(" ");
         sb.append(Chalk.of(Integer.toString(seat.getId())).darkCyan().bold()).append(" ");
         sb.append(Chalk.of(seat.getName()).blue());
 
