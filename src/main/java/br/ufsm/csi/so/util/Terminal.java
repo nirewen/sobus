@@ -18,7 +18,7 @@ public class Terminal {
 
         sb.append(Chalk.of(" LOG ").white().bgDarkMagenta()).append(" ");
         sb.append(Chalk.of("Arquivo de log criado").lightGray()).append(" ");
-        sb.append(Chalk.of(file).blue());
+        sb.append(Chalk.of(file).blue().underline());
 
         System.out.println(sb.toString());
     }
@@ -28,7 +28,7 @@ public class Terminal {
 
         sb.append(Chalk.of(" LOG ").white().bgDarkMagenta());
         sb.append(Chalk.of(" + FILA ").white().bgMagenta()).append(" ");
-        sb.append(Chalk.of(Integer.toString(seat.getId())).darkCyan()).append(" ");
+        sb.append(Chalk.of(Integer.toString(seat.getId())).darkCyan().bold()).append(" ");
         sb.append(Chalk.of(seat.getName()).blue());
 
         System.out.println(sb.toString());
@@ -38,8 +38,8 @@ public class Terminal {
         StringBuilder sb = new StringBuilder();
 
         sb.append(Chalk.of(" APP ").white().bgDarkRed()).append(" ");
-        sb.append(Chalk.of("Ouvindo na porta").lightGray()).append(" ");
-        sb.append(Chalk.of(Integer.toString(port)).darkCyan());
+        sb.append(Chalk.of("Servidor rodando em").lightGray()).append(" ");
+        sb.append(Chalk.of("http://localhost:" + port).darkCyan().underline());
 
         System.out.println(sb.toString());
     }

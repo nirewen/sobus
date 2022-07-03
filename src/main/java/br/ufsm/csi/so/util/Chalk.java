@@ -1,11 +1,15 @@
 package br.ufsm.csi.so.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Chalk {
     private final String ESC = "\u001B";
     private String finalText = "";
 
     private String fg;
     private String bg;
+    private String ef;
 
     public Chalk(String initialText) {
         this.finalText = initialText;
@@ -171,17 +175,63 @@ public class Chalk {
         return this;
     }
 
+    public Chalk bold() {
+        this.ef = "1";
+        return this;
+    }
+
+    public Chalk dimmed() {
+        this.ef = "2";
+        return this;
+    }
+
+    public Chalk italic() {
+        this.ef = "3";
+        return this;
+    }
+
+    public Chalk underline() {
+        this.ef = "4";
+        return this;
+    }
+
+    public Chalk blinking() {
+        this.ef = "5";
+        return this;
+    }
+
+    public Chalk reverse() {
+        this.ef = "7";
+        return this;
+    }
+
+    public Chalk invisible() {
+        this.ef = "8";
+        return this;
+    }
+
+    public Chalk strikethrough() {
+        this.ef = "9";
+        return this;
+    }
+
     private String getColorANSI(String color) {
         return ESC + "[" + color + "m";
     }
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
+        List<String> modifiers = new ArrayList<>();
 
+        if (ef != null)
+            modifiers.add(ef);
         if (fg != null)
-            sb.append(this.getColorANSI(fg));
+            modifiers.add(fg);
         if (bg != null)
-            sb.append(this.getColorANSI(bg));
+            modifiers.add(bg);
+
+        if (!modifiers.isEmpty())
+            sb.append(this.getColorANSI(String.join(";", modifiers)));
 
         sb.append(finalText);
 
