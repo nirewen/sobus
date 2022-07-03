@@ -5,7 +5,6 @@ import br.ufsm.csi.so.data.Seat;
 import br.ufsm.csi.so.server.Controller;
 import br.ufsm.csi.so.server.Request;
 import br.ufsm.csi.so.server.Response;
-import br.ufsm.csi.so.util.Terminal;
 import lombok.SneakyThrows;
 
 public class ConfirmController extends Controller {
@@ -36,7 +35,6 @@ public class ConfirmController extends Controller {
                 seat.setTaken(true);
 
                 App.logger.log(req.socket, seat);
-                Terminal.printLog(seat);
 
                 res.redirect("/home?success=true");
             }
