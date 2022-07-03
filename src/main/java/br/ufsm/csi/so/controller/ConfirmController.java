@@ -20,28 +20,39 @@ public class ConfirmController extends Controller {
     @Override
     @SneakyThrows
     public void onGET(Request req, Response res) {
-        int id = Integer.parseInt(req.query.params.get("id"));
+        String seatId = req.query.params.get("id");
         String name = req.query.params.get("name");
-        String[] date = req.query.params.get("date").split("T");
+        String date = req.query.params.get("date");
+
+        if (seatId == null || name == null || date == null) {
+            res.redirect("/home?failure=true");
+
+            return;
+        }
+
+        int id = Integer.parseInt(seatId);
+        String[] dateHour = date.split("T");
 
         Seat seat = App.seats.get(id);
 
         // id válido & data válida & assento vago
-        if (seat != null && date.length == 2 && !seat.isTaken()) {
+        if (seat != null && dateHour.length == 2 && !seat.isTaken()) {
             synchronized (App.seats) {
                 seat.setName(name);
-                seat.setDate(date[0]);
-                seat.setHour(date[1]);
+                seat.setDate(dateHour[0]);
+                seat.setHour(dateHour[1]);
                 seat.setTaken(true);
 
                 App.logger.log(req.socket, seat);
 
                 res.redirect("/home?success=true");
+
+                return;
             }
         } else {
             res.redirect("/home?failure=true");
-        }
 
-        res.send();
+            return;
+        }
     }
 }

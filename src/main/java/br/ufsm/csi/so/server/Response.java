@@ -26,33 +26,27 @@ public class Response {
         return this;
     }
 
-    public Response redirect(String location) {
+    public void redirect(String location) {
         this.header.status(302);
         this.header.addHeader("Location: " + location);
 
-        return this;
+        this.send();
     }
 
     @SneakyThrows
-    public Response send(String content) {
+    public void send(String content) {
         this.send(content.getBytes());
-
-        return this;
     }
 
     @SneakyThrows
-    public Response send(byte[] content) {
+    public void send(byte[] content) {
         this.out.write(this.header.build().getBytes());
 
         this.out.write(content);
-
-        return this;
     }
 
     @SneakyThrows
-    public Response send() {
+    public void send() {
         this.out.write(this.header.build().getBytes());
-
-        return this;
     }
 }

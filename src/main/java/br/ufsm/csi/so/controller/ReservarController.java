@@ -22,7 +22,7 @@ public class ReservarController extends Controller {
         Seat seat = App.seats.get(Integer.parseInt(id));
 
         if (seat.isTaken()) {
-            res.redirect("/home?failure=true").send();
+            res.redirect("/home?failure=true");
 
             return;
         }
