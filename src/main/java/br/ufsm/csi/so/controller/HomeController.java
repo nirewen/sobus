@@ -40,7 +40,6 @@ public class HomeController extends Controller {
 
         content = content.replace("<!-- SEATS -->", sb.toString());
 
-        // TODO: Usar header para enviar a mensagem de sucesso
         if (req.query.params.has("success")) {
             Element element = new Element("div")
                     .setClass("message success")
