@@ -67,14 +67,12 @@ public class Logger {
         @SneakyThrows
         public void run() {
             while (true) {
-                String entry;
-
                 synchronized (queue) {
                     if (queue.isEmpty()) {
                         queue.wait();
                     }
 
-                    entry = queue.remove(0);
+                    String entry = queue.remove(0);
 
                     FileWriter writer = new FileWriter(file.getName(), true);
 
