@@ -46,13 +46,9 @@ public class ConfirmController extends Controller {
                 App.logger.log(req.socket, seat);
 
                 res.redirect("/home?success=true");
-
-                return;
             }
         } else {
             res.redirect("/home?failure=true");
-
-            return;
         }
     }
 }

@@ -41,7 +41,7 @@ public class QueryParams {
 
                 String[] pair = kvPair.split("=", 2);
 
-                if (pair.length == 2) {
+                if (pair.length == 2 && !pair[1].isEmpty()) {
                     query.put(pair[0], URLDecoder.decode(pair[1], "UTF-8"));
                 } else {
                     query.put(pair[0], null);
