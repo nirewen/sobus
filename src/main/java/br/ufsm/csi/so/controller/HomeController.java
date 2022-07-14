@@ -27,9 +27,9 @@ public class HomeController extends Controller {
             Element element = new Element("a")
                     .setClass("seat")
                     .addClass("occupied", seat.isTaken())
-                    .addProp("data-name", seat.getName())
-                    .addProp("data-date", seat.getDate())
-                    .addProp("data-hour", seat.getHour())
+                    .addProp("data-name", seat.getName(), seat.isTaken())
+                    .addProp("data-date", seat.getDate(), seat.isTaken())
+                    .addProp("data-hour", seat.getHour(), seat.isTaken())
                     .content(seat.getId());
 
             if (!seat.isTaken())

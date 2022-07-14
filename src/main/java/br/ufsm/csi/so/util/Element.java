@@ -39,6 +39,13 @@ public class Element {
         return this;
     }
 
+    public Element addProp(String name, String value, boolean bool) {
+        if (bool)
+            return this.addProp(name, value);
+
+        return this;
+    }
+
     public Element content(String content) {
         this.content = content;
 
